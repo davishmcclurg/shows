@@ -45,6 +45,23 @@ venues << Venue.new(:name => 'Bottom of the Hill', :link => 'http://www.bottomof
   end
 end
 
+venues << Venue.new(:name => 'Brick and Mortar', :link => 'https://www.brickandmortarmusic.com') do
+  URI.open(link) do |html|
+    previous_date = today
+    Nokogiri(html).css('.tw-section').map do |section|
+      date = Date.new(today.year, *section.css('.tw-event-date').text.split('.').map(&:to_i))
+      date = date.next_year if date < previous_date
+      previous_date = date
+      show(
+        :time => Time.parse(section.css('.tw-event-time').text, date),
+        :link => section.css('.tw-name a').attr('href').value,
+        :title => section.css('.tw-name').text,
+        :description => section.css('.tw-name-presenting').text
+      )
+    end
+  end
+end
+
 shows = venues.flat_map(&:shows)
 shows.select! { |show| show.time >= today.to_time }
 shows.sort_by!(&:time)
