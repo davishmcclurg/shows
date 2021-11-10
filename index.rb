@@ -2,7 +2,6 @@ require 'date'
 require 'erb'
 require 'open-uri'
 require 'rss'
-require 'time'
 
 require 'bundler/inline'
 
