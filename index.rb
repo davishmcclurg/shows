@@ -26,6 +26,27 @@ end
 today = Date.today
 venues = []
 
+venues << Venue.new(:name => 'Cornerstone (Berkeley)', :link => 'https://cornerstoneberkeley.com/music-venue/') do
+  URI.open(link) do |html|
+    Nokogiri(html).css('article.list-view-item').map do |article|
+      title = article.css('h1.headliners,p.supports').map(&:content).reject(&:empty?).join(', ')
+      next if title =~ /passes/i # skip links to multi-day passes
+
+      date = Date.parse(article.css('span.dates').text)
+
+      # Handle yearless dates through the december->january rollover
+      date += 365 if date.month < today.month
+
+      time = Time.parse(article.css('span.start').text, date)
+      show(
+        :title => title,
+        :time => time,
+        :link => article.css('h1.headliners').css('a').attr('href').value,
+      )
+    end.compact
+  end
+end
+
 venues << Venue.new(:name => 'Bottom of the Hill', :link => 'http://www.bottomofthehill.com') do
   URI.open(URI.join(link, 'RSS.xml'), 'User-Agent' => '') do |rss|
     RSS::Parser.parse(rss).items.group_by(&:link).transform_values do |items|
