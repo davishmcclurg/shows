@@ -6,12 +6,20 @@
 <body>
   
     <style>
+      #venue-1760:not(:checked) ~ table tr[data-venue="1760"] {
+        display: none;
+      }
+    </style>
+    <input type="checkbox" id="venue-1760" checked>
+    <label for="venue-1760">Cornerstone (Berkeley)</label>
+  
+    <style>
       #venue-1780:not(:checked) ~ table tr[data-venue="1780"] {
         display: none;
       }
     </style>
     <input type="checkbox" id="venue-1780" checked>
-    <label for="venue-1780">Cornerstone (Berkeley)</label>
+    <label for="venue-1780">Bottom of the Hill</label>
   
     <style>
       #venue-1800:not(:checked) ~ table tr[data-venue="1800"] {
@@ -19,15 +27,7 @@
       }
     </style>
     <input type="checkbox" id="venue-1800" checked>
-    <label for="venue-1800">Bottom of the Hill</label>
-  
-    <style>
-      #venue-1820:not(:checked) ~ table tr[data-venue="1820"] {
-        display: none;
-      }
-    </style>
-    <input type="checkbox" id="venue-1820" checked>
-    <label for="venue-1820">Brick and Mortar</label>
+    <label for="venue-1800">Brick and Mortar</label>
   
   <table border="1" cellpadding="8">
     <thead>
@@ -39,7 +39,7 @@
     </thead>
     <tbody>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Wed, Jan 26
@@ -66,7 +66,7 @@ $12  in advance / $15 at the door  /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Wed, Jan 26
@@ -88,7 +88,7 @@ $12  in advance / $15 at the door  /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Thu, Jan 27
@@ -110,7 +110,7 @@ $12  in advance / $15 at the door  /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Thu, Jan 27
@@ -136,7 +136,7 @@ $22 /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Thu, Jan 27
@@ -158,7 +158,7 @@ $22 /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Fri, Jan 28
@@ -180,7 +180,7 @@ $22 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Fri, Jan 28
@@ -207,7 +207,7 @@ $25 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Fri, Jan 28
@@ -229,7 +229,7 @@ $25 /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Fri, Jan 28
@@ -251,7 +251,7 @@ $25 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sat, Jan 29
@@ -280,7 +280,7 @@ $15 advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Sat, Jan 29
@@ -302,7 +302,7 @@ $15 advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Sat, Jan 29
@@ -324,7 +324,7 @@ $15 advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sun, Jan 30
@@ -351,7 +351,7 @@ $12 /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Sun, Jan 30
@@ -373,7 +373,7 @@ $12 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Mon, Jan 31
@@ -395,7 +395,7 @@ $12 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Fri, Feb 4
@@ -422,7 +422,7 @@ $12 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Fri, Feb 4
@@ -444,7 +444,7 @@ $12 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sat, Feb 5
@@ -471,7 +471,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sat, Feb 5
@@ -493,7 +493,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Tue, Feb 8
@@ -515,7 +515,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Tue, Feb 8
@@ -537,7 +537,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Wed, Feb 9
@@ -559,7 +559,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Wed, Feb 9
@@ -581,7 +581,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Thu, Feb 10
@@ -608,7 +608,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Thu, Feb 10
@@ -630,7 +630,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Fri, Feb 11
@@ -657,7 +657,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Fri, Feb 11
@@ -679,7 +679,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Fri, Feb 11
@@ -701,7 +701,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sat, Feb 12
@@ -730,7 +730,7 @@ $20 advance / $25 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sat, Feb 12
@@ -752,7 +752,7 @@ $20 advance / $25 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Sat, Feb 12
@@ -774,7 +774,7 @@ $20 advance / $25 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sun, Feb 13
@@ -803,7 +803,7 @@ $12 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sun, Feb 13
@@ -825,7 +825,7 @@ $12 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Mon, Feb 14
@@ -847,7 +847,7 @@ $12 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Tue, Feb 15
@@ -869,7 +869,7 @@ $12 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Tue, Feb 15
@@ -891,7 +891,7 @@ $12 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Wed, Feb 16
@@ -919,7 +919,7 @@ $13 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Wed, Feb 16
@@ -941,7 +941,7 @@ $13 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Thu, Feb 17
@@ -963,7 +963,7 @@ $13 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Thu, Feb 17
@@ -990,7 +990,7 @@ $12 advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Fri, Feb 18
@@ -1017,7 +1017,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Fri, Feb 18
@@ -1039,7 +1039,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sat, Feb 19
@@ -1066,7 +1066,7 @@ $17 advance / $20 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sat, Feb 19
@@ -1088,7 +1088,7 @@ $17 advance / $20 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Sat, Feb 19
@@ -1110,7 +1110,7 @@ $17 advance / $20 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sun, Feb 20
@@ -1137,7 +1137,7 @@ $12 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Sun, Feb 20
@@ -1159,7 +1159,7 @@ $12 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sun, Feb 20
@@ -1181,7 +1181,7 @@ $12 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Tue, Feb 22
@@ -1210,7 +1210,7 @@ $13 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Tue, Feb 22
@@ -1232,7 +1232,7 @@ $13 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Tue, Feb 22
@@ -1254,7 +1254,7 @@ $13 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Wed, Feb 23
@@ -1282,7 +1282,7 @@ $17 in advance / $20 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Wed, Feb 23
@@ -1304,7 +1304,7 @@ $17 in advance / $20 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Thu, Feb 24
@@ -1331,7 +1331,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Thu, Feb 24
@@ -1353,7 +1353,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Fri, Feb 25
@@ -1383,7 +1383,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Fri, Feb 25
@@ -1405,29 +1405,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1820">
-          <td nowrap valign="top">
-            <p>
-              Fri, Feb 25
-              <br>
-               9:00pm
-            </p>
-          </td>
-          <td valign="top">
-            <p>
-              <strong><a href="https://www.brickandmortarmusic.com/event-details/11697925/the-undercurrent-oh-the-danger-">The Undercurrent, Oh The Danger!</a></strong>
-              <br>
-              Noise Pop Festival 2022 presents
-            </p>
-          </td>
-          <td nowrap valign="top">
-            <p>
-              <a href="https://www.brickandmortarmusic.com">Brick and Mortar</a>
-            </p>
-          </td>
-        </tr>
-      
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sat, Feb 26
@@ -1449,7 +1427,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sat, Feb 26
@@ -1478,7 +1456,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sat, Feb 26
@@ -1500,7 +1478,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Sat, Feb 26
@@ -1522,7 +1500,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sun, Feb 27
@@ -1551,7 +1529,7 @@ $15 in advance / $17 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Mon, Feb 28
@@ -1573,7 +1551,7 @@ $15 in advance / $17 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Tue, Mar 1
@@ -1595,7 +1573,7 @@ $15 in advance / $17 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Tue, Mar 1
@@ -1617,7 +1595,7 @@ $15 in advance / $17 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Wed, Mar 2
@@ -1644,7 +1622,7 @@ $18 in advance / $20 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Wed, Mar 2
@@ -1666,7 +1644,7 @@ $18 in advance / $20 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Wed, Mar 2
@@ -1688,7 +1666,7 @@ $18 in advance / $20 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Thu, Mar 3
@@ -1716,7 +1694,7 @@ $12 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Thu, Mar 3
@@ -1738,29 +1716,7 @@ $12 /
           </td>
         </tr>
       
-        <tr data-venue="1820">
-          <td nowrap valign="top">
-            <p>
-              Thu, Mar 3
-              <br>
-               9:00pm
-            </p>
-          </td>
-          <td valign="top">
-            <p>
-              <strong><a href="https://www.brickandmortarmusic.com/event-details/11465375/ryan-woods">Ryan Woods</a></strong>
-              <br>
-              Popscene presents
-            </p>
-          </td>
-          <td nowrap valign="top">
-            <p>
-              <a href="https://www.brickandmortarmusic.com">Brick and Mortar</a>
-            </p>
-          </td>
-        </tr>
-      
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Fri, Mar 4
@@ -1789,7 +1745,7 @@ $14 in advance / $16 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Fri, Mar 4
@@ -1811,7 +1767,7 @@ $14 in advance / $16 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Fri, Mar 4
@@ -1833,7 +1789,7 @@ $14 in advance / $16 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sat, Mar 5
@@ -1855,7 +1811,7 @@ $14 in advance / $16 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Tue, Mar 8
@@ -1882,7 +1838,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Wed, Mar 9
@@ -1904,7 +1860,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Wed, Mar 9
@@ -1926,7 +1882,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Thu, Mar 10
@@ -1953,7 +1909,7 @@ $13 advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Fri, Mar 11
@@ -1980,7 +1936,7 @@ $20 in advance / $25 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Fri, Mar 11
@@ -2002,7 +1958,7 @@ $20 in advance / $25 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Sun, Mar 13
@@ -2024,7 +1980,7 @@ $20 in advance / $25 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Sun, Mar 13
@@ -2046,7 +2002,7 @@ $20 in advance / $25 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Mon, Mar 14
@@ -2068,7 +2024,7 @@ $20 in advance / $25 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Tue, Mar 15
@@ -2090,7 +2046,7 @@ $20 in advance / $25 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Wed, Mar 16
@@ -2117,7 +2073,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Wed, Mar 16
@@ -2139,7 +2095,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Thu, Mar 17
@@ -2167,7 +2123,7 @@ $12 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Fri, Mar 18
@@ -2195,7 +2151,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Fri, Mar 18
@@ -2217,7 +2173,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sat, Mar 19
@@ -2244,7 +2200,7 @@ $13 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sat, Mar 19
@@ -2266,7 +2222,7 @@ $13 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Sat, Mar 19
@@ -2288,7 +2244,7 @@ $13 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sun, Mar 20
@@ -2319,7 +2275,7 @@ All proceeds will go into a trust for Joe&#39;s son, Eli
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Mon, Mar 21
@@ -2341,7 +2297,7 @@ All proceeds will go into a trust for Joe&#39;s son, Eli
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Tue, Mar 22
@@ -2368,7 +2324,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Wed, Mar 23
@@ -2395,7 +2351,7 @@ $18 in advance / $20 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Wed, Mar 23
@@ -2417,7 +2373,7 @@ $18 in advance / $20 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Thu, Mar 24
@@ -2439,7 +2395,7 @@ $18 in advance / $20 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Thu, Mar 24
@@ -2466,7 +2422,7 @@ $12  in advance / $15 at the door  /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Fri, Mar 25
@@ -2488,7 +2444,7 @@ $12  in advance / $15 at the door  /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Fri, Mar 25
@@ -2510,7 +2466,7 @@ $12  in advance / $15 at the door  /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sat, Mar 26
@@ -2539,7 +2495,7 @@ $15 advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sat, Mar 26
@@ -2561,29 +2517,7 @@ $15 advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
-          <td nowrap valign="top">
-            <p>
-              Sat, Mar 26
-              <br>
-               9:00pm
-            </p>
-          </td>
-          <td valign="top">
-            <p>
-              <strong><a href="https://www.brickandmortarmusic.com/event-details/11566545/penelope-isles-pom-poko">PENELOPE ISLES &amp; POM POKO</a></strong>
-              <br>
-              
-            </p>
-          </td>
-          <td nowrap valign="top">
-            <p>
-              <a href="https://www.brickandmortarmusic.com">Brick and Mortar</a>
-            </p>
-          </td>
-        </tr>
-      
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sun, Mar 27
@@ -2605,7 +2539,7 @@ $15 advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Sun, Mar 27
@@ -2627,7 +2561,7 @@ $15 advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Tue, Mar 29
@@ -2649,7 +2583,7 @@ $15 advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Tue, Mar 29
@@ -2671,7 +2605,7 @@ $15 advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Wed, Mar 30
@@ -2693,7 +2627,7 @@ $15 advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Wed, Mar 30
@@ -2720,7 +2654,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Wed, Mar 30
@@ -2742,7 +2676,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Thu, Mar 31
@@ -2764,7 +2698,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Fri, Apr 1
@@ -2786,7 +2720,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Fri, Apr 1
@@ -2808,7 +2742,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sat, Apr 2
@@ -2835,7 +2769,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sat, Apr 2
@@ -2857,7 +2791,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Sat, Apr 2
@@ -2879,7 +2813,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sun, Apr 3
@@ -2906,7 +2840,7 @@ $12 advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Sun, Apr 3
@@ -2928,7 +2862,7 @@ $12 advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Wed, Apr 6
@@ -2950,7 +2884,7 @@ $12 advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Thu, Apr 7
@@ -2972,7 +2906,7 @@ $12 advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Fri, Apr 8
@@ -2999,7 +2933,7 @@ $20 in advance / $24 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Fri, Apr 8
@@ -3021,7 +2955,7 @@ $20 in advance / $24 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sat, Apr 9
@@ -3043,7 +2977,7 @@ $20 in advance / $24 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Wed, Apr 13
@@ -3073,7 +3007,7 @@ note: Co-headliners may switch order
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Wed, Apr 13
@@ -3095,7 +3029,7 @@ note: Co-headliners may switch order
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Wed, Apr 20
@@ -3123,7 +3057,7 @@ $13 advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Thu, Apr 21
@@ -3145,7 +3079,7 @@ $13 advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Fri, Apr 22
@@ -3172,7 +3106,7 @@ $12 in advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sat, Apr 23
@@ -3199,7 +3133,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Tue, Apr 26
@@ -3221,7 +3155,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Fri, Apr 29
@@ -3243,7 +3177,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sat, Apr 30
@@ -3265,7 +3199,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Tue, May 3
@@ -3287,7 +3221,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Tue, May 3
@@ -3309,7 +3243,7 @@ $15 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Fri, May 6
@@ -3336,7 +3270,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sat, May 7
@@ -3358,7 +3292,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Wed, May 11
@@ -3380,7 +3314,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Wed, May 11
@@ -3407,7 +3341,7 @@ $14 advance / $17 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Fri, May 13
@@ -3429,7 +3363,7 @@ $14 advance / $17 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Fri, May 13
@@ -3460,7 +3394,7 @@ $17 in advance / $20 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Sat, May 14
@@ -3482,7 +3416,7 @@ $17 in advance / $20 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Tue, May 17
@@ -3504,7 +3438,7 @@ $17 in advance / $20 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Thu, May 19
@@ -3533,7 +3467,7 @@ $15 advance / $17 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sun, May 22
@@ -3562,7 +3496,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Sat, Jun 4
@@ -3584,7 +3518,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1780">
+        <tr data-venue="1760">
           <td nowrap valign="top">
             <p>
               Thu, Jun 9
@@ -3606,7 +3540,7 @@ $15 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sat, Jun 11
@@ -3635,7 +3569,7 @@ TBA /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Thu, Jun 16
@@ -3663,7 +3597,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Sat, Jun 18
@@ -3691,7 +3625,7 @@ $25 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Wed, Jun 22
@@ -3719,7 +3653,7 @@ $20 /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Thu, Jun 23
@@ -3746,7 +3680,7 @@ $17 advance / $20 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Wed, Aug 24
@@ -3774,7 +3708,7 @@ $12 advance / $15 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1800">
+        <tr data-venue="1780">
           <td nowrap valign="top">
             <p>
               Tue, Sep 13
@@ -3803,7 +3737,7 @@ $16 in advance / $18 at the door /
           </td>
         </tr>
       
-        <tr data-venue="1820">
+        <tr data-venue="1800">
           <td nowrap valign="top">
             <p>
               Wed, Oct 12
