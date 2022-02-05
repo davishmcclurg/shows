@@ -83,6 +83,26 @@ venues << Venue.new(:name => 'Brick and Mortar', :link => 'https://www.brickandm
   end
 end
 
+venues << Venue.new(:name => 'Rickshaw Stop', :link => 'https://rickshawstop.com/') do
+  URI.open(link) do |html|
+    Nokogiri(html).css('article.event-card').map do |article|
+      title = article.css('div.event-info h1 a').text
+      time = Time.parse(article.css('div.event-info p:not(.organizer)').first.text)
+      organizer = article.css('div.event-info p.organizer').text
+      price = article.css('div.buy p.ticket-price').text
+      link = article.css('div.buy div a.events-ticket-button').attr('href').value
+
+      # Flaccid attempt to cast yearless dates into the future for dec->jan
+      # rollover. We could probably add a helper for this.
+      time += (60 * 60 * 24 * 365) if time.month < today.month
+
+      description = [organizer, price].reject(&:empty?).join(' - ')
+
+      show(time: time, link: link, title: title, description: description)
+    end
+  end
+end
+
 shows = venues.flat_map(&:shows)
 shows.select! { |show| show.time >= today.to_time }
 shows.sort_by!(&:time)
