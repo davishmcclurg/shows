@@ -69,7 +69,10 @@ end
 venues << Venue.new(:name => 'Brick and Mortar', :link => 'https://www.brickandmortarmusic.com') do
   URI.open(link) do |html|
     previous_date = today
-    Nokogiri(html).css('.tw-section').map do |section|
+    Nokogiri(html).css('.tw-section').select do |section|
+      # Skip sections that have nested sections to work around their layout being broken
+      section.css('.tw-section').empty?
+    end.map do |section|
       date = Date.new(today.year, *section.css('.tw-event-date').text.split('.').map(&:to_i))
       date = date.next_year if date < previous_date
       previous_date = date
