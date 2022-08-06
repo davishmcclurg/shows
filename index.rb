@@ -69,19 +69,37 @@ end
 venues << Venue.new(:name => 'Brick and Mortar', :link => 'https://www.brickandmortarmusic.com') do
   URI.open(link) do |html|
     previous_date = today
-    Nokogiri(html).css('.tw-section').select do |section|
-      # Skip sections that have nested sections to work around their layout being broken
-      section.css('.tw-section').empty?
-    end.map do |section|
-      date = Date.new(today.year, *section.css('.tw-event-date').text.split('.').map(&:to_i))
-      date = date.next_year if date < previous_date
-      previous_date = date
-      show(
-        :time => Time.parse(section.css('.tw-event-time').text, date),
-        :link => section.css('.tw-name a').attr('href').value,
-        :title => section.css('.tw-name').text,
-        :description => section.css('.tw-name-presenting').text
-      )
+    Nokogiri(html).css('.tw-event-name-container').flat_map do |event_name_container|
+      row = event_name_container.parent
+      href = event_name_container.css('.tw-name a').attr('href')
+
+      dates_times_and_links = event_name_container.css('.tw-event-time').map do |event_time|
+        [
+          row.css('.tw-date-time .tw-event-date').text,
+          event_time.text,
+          href.value
+        ]
+      end
+
+      dates_times_and_links += row.css('.tw-sequential-dates').map do |sequential_date|
+        [
+          sequential_date.css('.tw-event-date').text,
+          sequential_date.css('.tw-event-time').text,
+          (sequential_date.css('.tw-more-info a').attr('href') || href).value
+        ]
+      end
+
+      dates_times_and_links.map do |date_text, time_text, link|
+        date = Date.new(today.year, *date_text.split('.').map(&:to_i))
+        date = date.next_year if date < previous_date
+        previous_date = date
+        show(
+          :time => Time.parse(time_text, date),
+          :link => link,
+          :title => event_name_container.css('.tw-name').text,
+          :description => event_name_container.css('.tw-name-presenting').text
+        )
+      end
     end
   end
 end
