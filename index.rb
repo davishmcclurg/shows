@@ -143,7 +143,7 @@ ERB.new(<<~ERB).run
     <title>Shows</title>
   </head>
   <body>
-    <% venues.each do |venue| %>
+    <% venues.sort_by(&:name).each do |venue| %>
       <style>
         #venue-<%= h(venue.object_id) %>:not(:checked) ~ table tr[data-venue="<%= h(venue.object_id) %>"] {
           display: none;
