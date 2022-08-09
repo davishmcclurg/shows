@@ -56,6 +56,7 @@ venues << Venue.new(:name => 'Bottom of the Hill', :link => 'http://www.bottomof
       time = item.description.scan(/\d{1,2}(?:\:\d{2})?\s*[ap]m/i).map do |time|
         Time.parse(time, date)
       end.min
+      time ||= Time.parse('12:00pm', date)
       show(
         :time => time,
         :link => item.link,
