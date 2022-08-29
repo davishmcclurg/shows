@@ -109,7 +109,8 @@ venues << Venue.new(:name => 'Rickshaw Stop', :link => 'https://rickshawstop.com
   URI.open(link) do |html|
     Nokogiri(html).css('article.event-card').map do |article|
       title = article.css('div.event-info h1 a').text
-      time = Time.parse(article.css('div.event-info p:not(.organizer)').first.text)
+      time = Time.parse(article.css('div.event-info .detail_event_date').first.text)
+      supporting_talent = article.css('div.event-info .detail_supporting_talent').text
       organizer = article.css('div.event-info p.organizer').text
       price = article.css('div.buy p.ticket-price').text
       link = article.css('div.buy div a.events-ticket-button').attr('href').value
@@ -118,7 +119,7 @@ venues << Venue.new(:name => 'Rickshaw Stop', :link => 'https://rickshawstop.com
       # rollover. We could probably add a helper for this.
       time += (60 * 60 * 24 * 365) if time.month < today.month
 
-      description = [organizer, price].reject(&:empty?).join(' - ')
+      description = [supporting_talent, organizer, price].reject(&:empty?).join(' - ')
 
       show(time: time, link: link, title: title, description: description)
     end
