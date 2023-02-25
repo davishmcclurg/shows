@@ -126,6 +126,24 @@ venues << Venue.new(:name => 'Rickshaw Stop', :link => 'https://rickshawstop.com
   end
 end
 
+venues << Venue.new(:name => 'DNA Lounge', :link => 'https://www.dnalounge.com/calendar/dnalounge.rss') do
+  # Regex to dig the calendar link out of the description
+  link_regex = Regexp.new(/https:\/\/www.dnalounge.com\/calendar\/\d{4}\/[\d\w\-]+\.html/i)
+
+  URI.open(link) do |xml|
+    Nokogiri::XML(xml).css('item').map do |item|
+      description = item.css('description').text
+
+      show(
+        time: Time.parse(item.css('dnalounge|date').text),
+        link: description[link_regex] || item.css('guid').text,
+        title: item.css('title').text,
+        description: description
+      )
+    end
+  end
+end
+
 shows = venues.flat_map(&:shows)
 shows.select! { |show| show.time >= today.to_time }
 shows.sort_by!(&:time)
