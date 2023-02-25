@@ -138,7 +138,7 @@ venues << Venue.new(:name => 'DNA Lounge', :link => 'https://www.dnalounge.com/c
         time: Time.parse(item.css('dnalounge|date').text),
         link: description[link_regex] || item.css('guid').text,
         title: item.css('title').text,
-        description: description
+        description: description.length > 1000 ? description[0...999] + "…" : description
       )
     end
   end
