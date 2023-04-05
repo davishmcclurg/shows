@@ -1,5 +1,6 @@
 require 'date'
 require 'erb'
+require 'json'
 require 'open-uri'
 require 'rss'
 
@@ -8,6 +9,7 @@ require 'bundler/inline'
 gemfile do
   source 'https://rubygems.org'
   gem 'nokogiri'
+  gem 'tzinfo'
 end
 
 Show = Struct.new(:time, :link, :title, :description, :venue, :keyword_init => true)
@@ -140,6 +142,38 @@ venues << Venue.new(:name => 'DNA Lounge', :link => 'https://www.dnalounge.com')
         title: item.css('title').text,
         description: description.length > 1000 ? description[0...999] + "…" : description
       )
+    end
+  end
+end
+
+venues << Venue.new(:name => 'Kilowatt', :link => 'https://kilowattbar.com/') do
+  URI.open(URI.join(link, 'events-1')) do |html|
+    # We need to pull the api key from a script tag inside an iframe. Nokogiri
+    # doesn't parse javascript, so a greasy regex will have to do for now.
+    Nokogiri::HTML(html).css('iframe').attr('srcdoc').text.match(/"apiKey":"(?<apikey>\w+)"/) do |match|
+      kw_api_key = match[:apikey]
+
+      if kw_api_key
+        uri = URI.parse('https://events-api.dice.fm/v1/events?page[size]=24&types=linkout,event&filter[venues][]=Kilowatt')
+        response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+          request = Net::HTTP::Get.new(uri)
+          request['Accept'] = 'application/json'
+          request['x-api-key'] = kw_api_key
+
+          http.request(request)
+        end
+
+        if Net::HTTPOK === response
+          JSON.parse(response.body)['data'].map do |event|
+            show(
+              time: Time.at(Time.iso8601(event['date']), in: TZInfo::Timezone.get(event['timezone'])),
+              link: event['url'],
+              title: event['name'],
+              description: event['description']
+            )
+          end
+        end
+      end
     end
   end
 end
