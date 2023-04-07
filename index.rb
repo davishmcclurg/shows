@@ -1,5 +1,6 @@
 require 'date'
 require 'erb'
+require 'json'
 require 'open-uri'
 require 'rss'
 
@@ -139,6 +140,32 @@ venues << Venue.new(:name => 'DNA Lounge', :link => 'https://www.dnalounge.com')
         link: description[link_regex] || item.css('guid').text,
         title: item.css('title').text,
         description: description.length > 1000 ? description[0...999] + "…" : description
+      )
+    end
+  end
+end
+
+venues << Venue.new(:name => 'Kilowatt', :link => 'https://kilowattbar.com/') do
+  URI.open(URI.join(link, 'events-1')) do |html|
+    # We need to pull the api key from a script tag inside an iframe. Nokogiri
+    # doesn't parse javascript, so a greasy regex will have to do for now.
+    api_key = Nokogiri::HTML(html).css('iframe').attr('srcdoc').text.match(/"apiKey":"(\w+)"/)[1]
+
+    uri = URI.parse('https://events-api.dice.fm/v1/events?page[size]=24&types=linkout,event&filter[venues][]=Kilowatt')
+    response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+      request = Net::HTTP::Get.new(uri)
+      request['Accept'] = 'application/json'
+      request['x-api-key'] = api_key
+
+      http.request(request)
+    end
+
+    JSON.parse(response.body).fetch('data').map do |event|
+      show(
+        time: Time.parse(event.fetch('date')).getlocal,
+        link: event.fetch('url'),
+        title: event.fetch('name'),
+        description: event.fetch('description')
       )
     end
   end
