@@ -171,6 +171,27 @@ venues << Venue.new(:name => 'Kilowatt', :link => 'https://kilowattbar.com/') do
   end
 end
 
+venues << Venue.new(:name => 'Knockout', :link => 'https://theknockoutsf.com') do
+  URI.open(URI.join(link, 'events/feed')) do |xml|
+    RSS::Parser.parse(xml).items.map do |item|
+      description = Nokogiri::HTML(item.content_encoded).text
+
+      # Workaround for the occasional empty title
+      title = item.title
+      title = description.split('•').first if title.empty?
+
+      next if title =~ /(karaoke|bingo)/i
+
+      show(
+        time: item.pubDate.getlocal,
+        link: item.guid,
+        title: title,
+        description: description
+      )
+    end.compact
+  end
+end
+
 shows = venues.flat_map(&:shows)
 shows.select! { |show| show.time >= today.to_time }
 shows.sort_by!(&:time)
