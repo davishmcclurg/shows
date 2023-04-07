@@ -1,4 +1,3 @@
-require 'cgi'
 require 'date'
 require 'erb'
 require 'open-uri'
@@ -9,7 +8,6 @@ require 'bundler/inline'
 gemfile do
   source 'https://rubygems.org'
   gem 'nokogiri'
-  gem 'tzinfo'
 end
 
 Show = Struct.new(:time, :link, :title, :description, :venue, :keyword_init => true)
@@ -148,22 +146,18 @@ end
 
 venues << Venue.new(:name => 'Knockout', :link => 'https://theknockoutsf.com') do
   URI.open(URI.join(link, 'events/feed')) do |xml|
-    Nokogiri::XML(xml).css('item').map do |item|
-      # Nokogiri doesn't decode this correctly, so we have to force it :(
-      description = CGI.unescape_html(item.css('description').text)
+    RSS::Parser.parse(xml).items.map do |item|
+      description = Nokogiri::HTML(item.content_encoded).text
 
       # Workaround for the occasional empty title
-      title = item.css('title').text
+      title = item.title
       title = description.split('•').first if title.empty?
 
       next if title =~ /(karaoke|bingo)/i
 
       show(
-        time: Time.at(
-          Time.parse(item.css('pubDate').text),
-          in: TZInfo::Timezone.get('America/Los_Angeles')
-        ),
-        link: item.css('guid').text,
+        time: item.pubDate.getlocal,
+        link: item.guid,
         title: title,
         description: description
       )
