@@ -184,7 +184,7 @@ venues << Venue.new(:name => 'Knockout', :link => 'https://theknockoutsf.com') d
 
       show(
         time: item.pubDate.getlocal,
-        link: item.guid,
+        link: item.link,
         title: title,
         description: description
       )
