@@ -1,3 +1,4 @@
+require 'base64'
 require 'date'
 require 'erb'
 require 'json'
@@ -11,7 +12,33 @@ gemfile do
   gem 'nokogiri'
 end
 
-Show = Struct.new(:time, :link, :title, :description, :venue, :keyword_init => true)
+Show = Struct.new(:time, :link, :title, :description, :venue, :keyword_init => true) do
+  def ical_link
+    'data:text/calendar;base64,' +
+    Base64.urlsafe_encode64(
+      [
+        ['BEGIN', 'VCALENDAR'],
+        ['VERSION', '2.0'],
+        ['BEGIN', 'VEVENT'],
+        ['URL', link],
+        ['DTSTART', ical_time(time)],
+        ['DTEND', ical_time(time + (3600 * 3))],
+        ['SUMMARY', title],
+        ['DESCRIPTION', description&.gsub("\n", '\\n')],
+        ['LOCATION', venue.name],
+        ['END', 'VEVENT'],
+        ['END', 'VCALENDAR']
+      ].map { |e| e.join(':') }.join("\n")
+    )
+  end
+
+  private
+
+  # https://icalendar.org/iCalendar-RFC-5545/3-3-5-date-time.html
+  def ical_time(time)
+    time.utc.strftime('%Y%m%dT%H%M%SZ')
+  end
+end
 
 Venue = Struct.new(:name, :link, :shows, :keyword_init => true) do
   def initialize(*, &block)
@@ -243,6 +270,8 @@ ERB.new(<<~ERB).run
                 <strong><a href="<%= h(show.link) %>"><%= normalize(show.title) %></a></strong>
                 <br>
                 <%= normalize(show.description) %>
+                <br>
+                <a href="<%= show.ical_link %>">iCal</a>
               </p>
             </td>
             <td nowrap valign="top">
