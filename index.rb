@@ -85,11 +85,13 @@ venues << Venue.new(:name => 'Bottom of the Hill', :link => 'http://www.bottomof
         Time.parse(time, date)
       end.min
       time ||= Time.parse('12:00pm', date)
+      fragment = Nokogiri::HTML.fragment(item.description)
+      fragment.css('br').each { |node| node.replace(' / ') }
       show(
         :time => time,
         :link => item.link,
         :title => item.title.partition(':').last.strip,
-        :description => item.description
+        :description => fragment.text.strip
       )
     end
   end
@@ -225,12 +227,6 @@ shows.sort_by!(&:time)
 
 include ERB::Util
 
-def normalize(text)
-  fragment = Nokogiri::HTML.fragment(text)
-  fragment.css('br').each { |node| node.replace(' / ') }
-  h(fragment.text.strip)
-end
-
 ERB.new(<<~ERB).run
   <!doctype html>
   <html>
@@ -267,16 +263,16 @@ ERB.new(<<~ERB).run
             </td>
             <td valign="top">
               <p>
-                <strong><a href="<%= h(show.link) %>"><%= normalize(show.title) %></a></strong>
+                <strong><a href="<%= h(show.link) %>"><%= h(show.title) %></a></strong>
                 <br>
-                <%= normalize(show.description) %>
+                <%= h(show.description) %>
                 <br>
                 <a href="<%= show.ical_link %>">iCal</a>
               </p>
             </td>
             <td nowrap valign="top">
               <p>
-                <a href="<%= h(show.venue.link) %>"><%= normalize(show.venue.name) %></a>
+                <a href="<%= h(show.venue.link) %>"><%= h(show.venue.name) %></a>
               </p>
             </td>
           </tr>
