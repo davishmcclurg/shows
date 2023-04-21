@@ -16,7 +16,6 @@ end
 Show = Struct.new(:time, :link, :title, :description, :venue, :keyword_init => true) do
   def ical_link
     dtstart = ical_time(time)
-    digest = Digest::SHA2.hexdigest("#{dtstart}:#{link}:#{title}:#{description}:#{venue.name}")
     ics = [
       ['BEGIN', 'VCALENDAR'],
       ['PRODID', '+//IDN davishmcclurg.github.io//NONSGML shows//EN'],
@@ -42,6 +41,10 @@ Show = Struct.new(:time, :link, :title, :description, :venue, :keyword_init => t
       lines.join("\r\n")
     end.join("\r\n")
     "data:text/calendar;base64,#{Base64.strict_encode64(ics)}"
+  end
+
+  def digest
+    Digest::SHA2.hexdigest("#{time}:#{link}:#{title}:#{description}:#{venue.name}")
   end
 
   private
@@ -268,7 +271,7 @@ ERB.new(<<~ERB).run
           <tr data-venue="<%= h(show.venue.object_id) %>">
             <td nowrap valign="top">
               <p>
-                <a href="<%= h(show.ical_link) %>">
+                <a href="<%= h(show.ical_link) %>" download="<%= h(show.digest) %>.ics">
                   <%= show.time.strftime('%a, %b %-d') %>
                   <br>
                   <%= show.time.strftime('%l:%M%P') %>
