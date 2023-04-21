@@ -23,6 +23,7 @@ Show = Struct.new(:time, :link, :title, :description, :venue, :keyword_init => t
         ['URL', link],
         ['DTSTART', ical_time(time)],
         ['DTEND', ical_time(time + (3600 * 3))],
+        ['DTSTAMP', ical_time(time)],
         ['SUMMARY', title],
         ['DESCRIPTION', description&.gsub("\n", '\\n')],
         ['LOCATION', venue.name],
