@@ -41,7 +41,7 @@ Show = Struct.new(:time, :link, :title, :description, :venue, :keyword_init => t
       end
       lines.join("\r\n")
     end.join("\r\n")
-    "data:text/calendar;base64,#{Base64.urlsafe_encode64(ics)}"
+    "data:text/calendar;base64,#{Base64.strict_encode64(ics)}"
   end
 
   private
