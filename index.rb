@@ -37,7 +37,7 @@ Show = Struct.new(:time, :link, :title, :description, :venue, :keyword_init => t
 
   # https://icalendar.org/iCalendar-RFC-5545/3-3-5-date-time.html
   def ical_time(time)
-    time.utc.strftime('%Y%m%dT%H%M%SZ')
+    time.getutc.strftime('%Y%m%dT%H%M%SZ')
   end
 end
 
