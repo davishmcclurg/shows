@@ -1,5 +1,6 @@
 require 'base64'
 require 'date'
+require 'digest'
 require 'erb'
 require 'json'
 require 'open-uri'
@@ -14,28 +15,38 @@ end
 
 Show = Struct.new(:time, :link, :title, :description, :venue, :keyword_init => true) do
   def ical_link
-    'data:text/calendar;base64,' +
-    Base64.urlsafe_encode64(
-      [
-        ['BEGIN', 'VCALENDAR'],
-        ['VERSION', '2.0'],
-        ['BEGIN', 'VEVENT'],
-        ['URL', link],
-        ['DTSTART', ical_time(time)],
-        ['DTEND', ical_time(time + (3600 * 3))],
-        ['DTSTAMP', ical_time(time)],
-        ['SUMMARY', title],
-        ['DESCRIPTION', description&.gsub("\n", '\\n')],
-        ['LOCATION', venue.name],
-        ['END', 'VEVENT'],
-        ['END', 'VCALENDAR']
-      ].map { |e| e.join(':') }.join("\n")
-    )
+    dtstart = ical_time(time)
+    digest = Digest::SHA2.hexdigest("#{dtstart}:#{link}:#{title}:#{description}:#{venue.name}")
+    ics = [
+      ['BEGIN', 'VCALENDAR'],
+      ['PRODID', '+//IDN davishmcclurg.github.io//NONSGML shows//EN'],
+      ['VERSION', '2.0'],
+      ['BEGIN', 'VEVENT'],
+      ['UID', "#{digest}@davishmcclurg.github.io"],
+      ['DTSTAMP', dtstart],
+      ['URL', link],
+      ['DTSTART', dtstart],
+      ['DTEND', ical_time(time + (3600 * 3))],
+      ['SUMMARY', title],
+      ['DESCRIPTION', description],
+      ['LOCATION', venue.name],
+      ['END', 'VEVENT'],
+      ['END', 'VCALENDAR']
+    ].map do |property, value|
+      # https://www.rfc-editor.org/rfc/rfc5545#section-3.1
+      lines = ["#{property}:"]
+      value.to_s.strip.gsub("\n", '\\n').each_grapheme_cluster do |grapheme|
+        lines << ' ' if (lines.last.bytesize + grapheme.bytesize) > 75
+        lines.last << grapheme
+      end
+      lines.join("\r\n")
+    end.join("\r\n")
+    "data:text/calendar;base64,#{Base64.urlsafe_encode64(ics)}"
   end
 
   private
 
-  # https://icalendar.org/iCalendar-RFC-5545/3-3-5-date-time.html
+  # https://www.rfc-editor.org/rfc/rfc5545#section-3.3.5
   def ical_time(time)
     time.getutc.strftime('%Y%m%dT%H%M%SZ')
   end
