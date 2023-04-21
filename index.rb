@@ -256,9 +256,11 @@ ERB.new(<<~ERB).run
           <tr data-venue="<%= h(show.venue.object_id) %>">
             <td nowrap valign="top">
               <p>
-                <%= show.time.strftime('%a, %b %-d') %>
-                <br>
-                <%= show.time.strftime('%l:%M%P') %>
+                <a href="<%= h(show.ical_link) %>">
+                  <%= show.time.strftime('%a, %b %-d') %>
+                  <br>
+                  <%= show.time.strftime('%l:%M%P') %>
+                </a>
               </p>
             </td>
             <td valign="top">
@@ -266,8 +268,6 @@ ERB.new(<<~ERB).run
                 <strong><a href="<%= h(show.link) %>"><%= h(show.title) %></a></strong>
                 <br>
                 <%= h(show.description) %>
-                <br>
-                <a href="<%= show.ical_link %>">iCal</a>
               </p>
             </td>
             <td nowrap valign="top">
