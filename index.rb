@@ -242,7 +242,7 @@ shows.sort_by!(&:time)
 
 include ERB::Util
 
-ERB.new(<<~ERB).run
+File.write('index.html', ERB.new(<<~ERB).result)
   <!doctype html>
   <html>
   <head>
@@ -297,3 +297,9 @@ ERB.new(<<~ERB).run
   </body>
   </html>
 ERB
+
+script = ['Hello, you\'re listening to today\'s shows.']
+shows.select { |show| show.time.to_date == today }.each do |show|
+  script << "At #{show.time.strftime('%-l:%M%P')} #{show.venue.name} is showing: #{show.title}."
+end
+File.write('today.txt', script.join(' '))

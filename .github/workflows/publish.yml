@@ -7,7 +7,7 @@ on:
     - cron: '*/15 * * * *'
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     env:
       TZ: America/Los_Angeles
     steps:
@@ -20,7 +20,8 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git merge origin/main
-          ruby index.rb > index.html
-          git add index.html
+          ruby index.rb
+          say -f today.txt -o today.aiff
+          git add index.html today.aiff
           git commit -m "$(date)" || echo "no changes"
           git push
