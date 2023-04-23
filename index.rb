@@ -274,7 +274,7 @@ ERB.new(<<~ERB).run
                 <a href="<%= h(show.ical_link) %>" download="<%= h(show.digest) %>.ics">
                   <%= show.time.strftime('%a, %b %-d') %>
                   <br>
-                  <%= show.time.strftime('%l:%M%P') %>
+                  <%= show.time.strftime('%-l:%M%P') %>
                 </a>
               </p>
             </td>
