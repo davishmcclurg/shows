@@ -21,7 +21,7 @@ jobs:
           git config user.email github-actions@github.com
           git merge origin/main
           ruby index.rb
-          say -f today.txt -o today.aiff
-          git add index.html today.aiff
+          say -f today.txt -o today.aac
+          git add index.html today.aac
           git commit -m "$(date)" || echo "no changes"
           git push
