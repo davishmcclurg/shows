@@ -224,7 +224,7 @@ venues << Venue.new(:name => 'Knockout', :link => 'https://theknockoutsf.com') d
       title = item.title
       title = description.split('•').first if title.empty?
 
-      next if title =~ /(karaoke|bingo)/i
+      next if title =~ /(karaoke|bingo|trivia)/i
 
       show(
         time: item.pubDate.getlocal,
