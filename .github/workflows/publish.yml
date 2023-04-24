@@ -21,7 +21,9 @@ jobs:
           git config user.email github-actions@github.com
           git merge origin/main
           ruby index.rb
-          say -f today.txt -o today.aac
-          git add index.html today.aac
-          git commit -m "$(date)" || echo "no changes"
-          git push
+          if ! git ls-files --error-unmatch index.html &> /dev/null || ! git diff -s --exit-code index.html; then
+            say -f today.txt -o today.aac
+            git add index.html today.aac
+            git commit -m "$(date)"
+            git push
+          fi
