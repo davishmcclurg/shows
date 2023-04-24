@@ -238,7 +238,7 @@ end
 
 shows = venues.flat_map(&:shows)
 shows.select! { |show| show.time >= today.to_time }
-shows.sort_by!(&:time)
+shows.sort_by! { |show| [show.time, show.title] }
 
 include ERB::Util
 
