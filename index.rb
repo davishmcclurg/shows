@@ -236,6 +236,23 @@ venues << Venue.new(:name => 'Knockout', :link => 'https://theknockoutsf.com') d
   end
 end
 
+venues << Venue.new(:name => 'The Chapel', :link => 'https://thechapelsf.com/') do
+  URI.open(URI.join(link, 'music/')) do |html|
+    Nokogiri(html).css('div#list-view-events').last.css('div.event-info-block').map do |event|
+      title = event.css('p.title').text
+
+      next if title =~ /private event/i
+
+      show(
+        time: Time.parse(event.css('p.date, span.see-doortime').map(&:text).join(' ')),
+        link: event.css('p.title a').attr('href').value,
+        title: title,
+        description: event.css('p.subtitle, p.ages-price').map(&:text).join('. ')
+      )
+    end.compact
+  end
+end
+
 shows = venues.flat_map(&:shows)
 shows.select! { |show| show.time >= today.to_time }
 shows.sort_by! { |show| [show.time, show.title] }
