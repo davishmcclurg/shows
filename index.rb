@@ -173,16 +173,18 @@ end
 
 venues << Venue.new(:name => 'DNA Lounge', :link => 'https://www.dnalounge.com') do
   # Regex to dig the calendar link out of the description
-  link_regex = Regexp.new(/https:\/\/www.dnalounge.com\/calendar\/\d{4}\/[\d\w\-]+\.html/i)
+  link_regex = /https:\/\/www.dnalounge.com\/calendar\/\d{4}\/[\d\w\-]+\.html/i
+  title_regex = /\A(#{Date::ABBR_MONTHNAMES.compact.join('|')}) \d+ \((#{Date::ABBR_DAYNAMES.join('|')})\): /i
 
   URI.open(URI.join(link, 'calendar/dnalounge.rss')) do |xml|
     Nokogiri::XML(xml).css('item').map do |item|
       description = item.css('description').text
+      title = item.css('title').text.gsub(title_regex, '')
 
       show(
         time: Time.parse(item.css('pubDate').text),
         link: description[link_regex] || item.css('guid').text,
-        title: item.css('title').text,
+        title: title,
         description: description.length > 1000 ? description[0...999] + "…" : description
       )
     end
@@ -216,6 +218,8 @@ venues << Venue.new(:name => 'Kilowatt', :link => 'https://kilowattbar.com/') do
 end
 
 venues << Venue.new(:name => 'Knockout', :link => 'https://theknockoutsf.com') do
+  title_regex = / • \d+(am|pm) to \d+(am|pm)\z/i
+
   URI.open(URI.join(link, 'events/feed')) do |xml|
     RSS::Parser.parse(xml).items.map do |item|
       description = Nokogiri::HTML(item.content_encoded).text
@@ -223,6 +227,7 @@ venues << Venue.new(:name => 'Knockout', :link => 'https://theknockoutsf.com') d
       # Workaround for the occasional empty title
       title = item.title
       title = description.split('•').first if title.empty?
+      title = title.gsub(title_regex, '')
 
       next if title =~ /(karaoke|bingo|trivia)/i
 
