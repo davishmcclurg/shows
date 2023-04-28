@@ -4,70 +4,76 @@
   <title>Shows</title>
 </head>
 <body>
+  <script>
+    function uncheckOtherVenues(id) {
+      document.getElementById('venue-' + id).checked = true;
+      document.querySelectorAll('input[type="checkbox"]:not([id="venue-' + id + '"])').forEach(input => input.checked = false);
+    }
+  </script>
   
     <style>
       #venue-1740:not(:checked) ~ table tr[data-venue="1740"] {
         display: none;
       }
     </style>
-    <input type="checkbox" id="venue-1740" checked>
-    <label for="venue-1740">Bottom of the Hill</label>
+    <input type="checkbox" id="venue-1740" checked ondblclick="uncheckOtherVenues(1740)">
+    <label for="venue-1740" ondblclick="uncheckOtherVenues(1740)">Bottom of the Hill</label>
   
     <style>
       #venue-1760:not(:checked) ~ table tr[data-venue="1760"] {
         display: none;
       }
     </style>
-    <input type="checkbox" id="venue-1760" checked>
-    <label for="venue-1760">Brick and Mortar</label>
+    <input type="checkbox" id="venue-1760" checked ondblclick="uncheckOtherVenues(1760)">
+    <label for="venue-1760" ondblclick="uncheckOtherVenues(1760)">Brick and Mortar</label>
   
     <style>
       #venue-1780:not(:checked) ~ table tr[data-venue="1780"] {
         display: none;
       }
     </style>
-    <input type="checkbox" id="venue-1780" checked>
-    <label for="venue-1780">Cornerstone (Berkeley)</label>
+    <input type="checkbox" id="venue-1780" checked ondblclick="uncheckOtherVenues(1780)">
+    <label for="venue-1780" ondblclick="uncheckOtherVenues(1780)">Cornerstone (Berkeley)</label>
   
     <style>
       #venue-1800:not(:checked) ~ table tr[data-venue="1800"] {
         display: none;
       }
     </style>
-    <input type="checkbox" id="venue-1800" checked>
-    <label for="venue-1800">DNA Lounge</label>
+    <input type="checkbox" id="venue-1800" checked ondblclick="uncheckOtherVenues(1800)">
+    <label for="venue-1800" ondblclick="uncheckOtherVenues(1800)">DNA Lounge</label>
   
     <style>
       #venue-1820:not(:checked) ~ table tr[data-venue="1820"] {
         display: none;
       }
     </style>
-    <input type="checkbox" id="venue-1820" checked>
-    <label for="venue-1820">Kilowatt</label>
+    <input type="checkbox" id="venue-1820" checked ondblclick="uncheckOtherVenues(1820)">
+    <label for="venue-1820" ondblclick="uncheckOtherVenues(1820)">Kilowatt</label>
   
     <style>
       #venue-1840:not(:checked) ~ table tr[data-venue="1840"] {
         display: none;
       }
     </style>
-    <input type="checkbox" id="venue-1840" checked>
-    <label for="venue-1840">Knockout</label>
+    <input type="checkbox" id="venue-1840" checked ondblclick="uncheckOtherVenues(1840)">
+    <label for="venue-1840" ondblclick="uncheckOtherVenues(1840)">Knockout</label>
   
     <style>
       #venue-1860:not(:checked) ~ table tr[data-venue="1860"] {
         display: none;
       }
     </style>
-    <input type="checkbox" id="venue-1860" checked>
-    <label for="venue-1860">Rickshaw Stop</label>
+    <input type="checkbox" id="venue-1860" checked ondblclick="uncheckOtherVenues(1860)">
+    <label for="venue-1860" ondblclick="uncheckOtherVenues(1860)">Rickshaw Stop</label>
   
     <style>
       #venue-1880:not(:checked) ~ table tr[data-venue="1880"] {
         display: none;
       }
     </style>
-    <input type="checkbox" id="venue-1880" checked>
-    <label for="venue-1880">The Chapel</label>
+    <input type="checkbox" id="venue-1880" checked ondblclick="uncheckOtherVenues(1880)">
+    <label for="venue-1880" ondblclick="uncheckOtherVenues(1880)">The Chapel</label>
   
   <table border="1" cellpadding="8">
     <thead>
