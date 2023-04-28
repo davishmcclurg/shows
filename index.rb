@@ -273,8 +273,10 @@ File.write('index.html', ERB.new(<<~ERB).result)
   <body>
     <script>
       function uncheckOtherVenues(id) {
+        var selector = 'input[type="checkbox"]:not(#venue-' + id + ')';
+        var checked = !document.querySelector(selector + ':checked');
+        document.querySelectorAll(selector).forEach(input => input.checked = checked);
         document.getElementById('venue-' + id).checked = true;
-        document.querySelectorAll('input[type="checkbox"]:not([id="venue-' + id + '"])').forEach(input => input.checked = false);
       }
     </script>
     <% venues.sort_by(&:name).each do |venue| %>
