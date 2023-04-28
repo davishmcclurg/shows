@@ -271,14 +271,20 @@ File.write('index.html', ERB.new(<<~ERB).result)
     <title>Shows</title>
   </head>
   <body>
+    <script>
+      function uncheckOtherVenues(id) {
+        document.getElementById('venue-' + id).checked = true;
+        document.querySelectorAll('input[type="checkbox"]:not([id="venue-' + id + '"])').forEach(input => input.checked = false);
+      }
+    </script>
     <% venues.sort_by(&:name).each do |venue| %>
       <style>
         #venue-<%= h(venue.object_id) %>:not(:checked) ~ table tr[data-venue="<%= h(venue.object_id) %>"] {
           display: none;
         }
       </style>
-      <input type="checkbox" id="venue-<%= h(venue.object_id) %>" checked>
-      <label for="venue-<%= h(venue.object_id) %>"><%= h(venue.name) %></label>
+      <input type="checkbox" id="venue-<%= h(venue.object_id) %>" checked ondblclick="uncheckOtherVenues(<%= h(venue.object_id) %>)">
+      <label for="venue-<%= h(venue.object_id) %>" ondblclick="uncheckOtherVenues(<%= h(venue.object_id) %>)"><%= h(venue.name) %></label>
     <% end %>
     <table border="1" cellpadding="8">
       <thead>
