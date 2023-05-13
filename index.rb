@@ -192,10 +192,10 @@ venues << Venue.new(:name => 'DNA Lounge', :link => 'https://www.dnalounge.com')
 end
 
 venues << Venue.new(:name => 'Kilowatt', :link => 'https://kilowattbar.com/') do
-  URI.open(URI.join(link, 'events-1')) do |html|
+  URI.open(URI.join(link, 'events')) do |html|
     # We need to pull the api key from a script tag inside an iframe. Nokogiri
     # doesn't parse javascript, so a greasy regex will have to do for now.
-    api_key = Nokogiri::HTML(html).css('iframe').attr('srcdoc').text.match(/"apiKey":"(\w+)"/)[1]
+    api_key = Nokogiri::HTML(html).css('div.sqs-block-content script').text.match(/"apiKey":"(\w+)"/)[1]
 
     uri = URI.parse('https://events-api.dice.fm/v1/events?page[size]=24&types=linkout,event&filter[venues][]=Kilowatt')
     response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
