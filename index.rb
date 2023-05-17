@@ -66,6 +66,25 @@ Venue = Struct.new(:name, :link, :shows, :keyword_init => true) do
   end
 end
 
+def seetickets_parser(event)
+  title = event.css('p.title').text
+
+  return nil if title =~ /private event/i
+
+  time = Time.parse(event.css('p.date, span.see-doortime').map(&:text).join(' '))
+
+  # Flaccid attempt to cast yearless dates into the future for dec->jan
+  # rollover. We could probably add a helper for this.
+  time += (60 * 60 * 24 * 365) if time.month < Date.today.month
+
+  show(
+    time: time,
+    link: link = event.css('p.title a').attr('href').value,
+    title: event.css('p.title').text,
+    description: event.css('p.subtitle, p.ages-price').map(&:text).reject(&:empty?).join('. ')
+  )
+end
+
 today = Date.today
 venues = []
 
@@ -152,22 +171,9 @@ end
 
 venues << Venue.new(:name => 'Rickshaw Stop', :link => 'https://rickshawstop.com/') do
   URI.open(link) do |html|
-    Nokogiri(html).css('article.event-card').map do |article|
-      title = article.css('div.event-info h1 a').text
-      time = Time.parse(article.css('div.event-info .detail_event_date').first.text)
-      supporting_talent = article.css('div.event-info .detail_supporting_talent').text
-      organizer = article.css('div.event-info p.organizer').text
-      price = article.css('div.buy p.ticket-price').text
-      link = article.css('div.buy div a.events-ticket-button').attr('href').value
-
-      # Flaccid attempt to cast yearless dates into the future for dec->jan
-      # rollover. We could probably add a helper for this.
-      time += (60 * 60 * 24 * 365) if time.month < today.month
-
-      description = [supporting_talent, organizer, price].reject(&:empty?).join(' - ')
-
-      show(time: time, link: link, title: title, description: description)
-    end
+    Nokogiri(html).css('div.seetickets-list-event-container').map do |event|
+      seetickets_parser(event)
+    end.compact
   end
 end
 
@@ -244,16 +250,7 @@ end
 venues << Venue.new(:name => 'The Chapel', :link => 'https://thechapelsf.com/') do
   URI.open(URI.join(link, 'music/')) do |html|
     Nokogiri(html).css('div#list-view-events').last.css('div.event-info-block').map do |event|
-      title = event.css('p.title').text
-
-      next if title =~ /private event/i
-
-      show(
-        time: Time.parse(event.css('p.date, span.see-doortime').map(&:text).join(' ')),
-        link: event.css('p.title a').attr('href').value,
-        title: title,
-        description: event.css('p.subtitle, p.ages-price').map(&:text).join('. ')
-      )
+      seetickets_parser(event)
     end.compact
   end
 end
