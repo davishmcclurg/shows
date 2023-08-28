@@ -88,24 +88,28 @@ end
 today = Date.today
 venues = []
 
-venues << Venue.new(:name => 'Cornerstone (Berkeley)', :link => 'https://cornerstoneberkeley.com/music-venue/') do
+venues << Venue.new(:name => 'Cornerstone (Berkeley)', :link => 'https://www.cornerstoneberkeley.com/events') do
   URI.open(link) do |html|
-    Nokogiri(html).css('article.list-view-item').map do |article|
-      title = article.css('h1.headliners,p.supports').map(&:content).reject(&:empty?).join(', ')
-      next if title =~ /passes/i # skip links to multi-day passes
+    Nokogiri(html).css('.shows-wrapper .w-dyn-item').map do |item|
+      title = item.css('.day-events-header .show-name').text
 
-      date = Date.parse(article.css('span.dates').text)
-
+      date = Date.parse(item.css('.day-events-header .date-2').text)
       # Handle yearless dates through the december->january rollover
       date += 365 if date.month < today.month
+      time = Time.parse(item.css('.day-event-content .time-2').text, date)
 
-      time = Time.parse(article.css('span.start').text, date)
+      description = item.css('.day-event-content #event-desc').children.map do |child|
+        child.css('br').each { |node| node.replace(' / ') }
+        child.text.strip
+      end.reject(&:empty?).join(' / ')
+
       show(
         :title => title,
         :time => time,
-        :link => article.css('h1.headliners').css('a').attr('href').value,
+        :link => item.css('.day-event-content .tickets').attr('href').value,
+        :description => description.length > 1000 ? description[0...999] + "…" : description
       )
-    end.compact
+    end
   end
 end
 
