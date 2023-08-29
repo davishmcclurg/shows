@@ -118,7 +118,8 @@ venues << Venue.new(:name => 'Bottom of the Hill', :link => 'http://www.bottomof
     RSS::Parser.parse(rss).items.group_by(&:link).transform_values do |items|
       items.max_by(&:date)
     end.map do |date, item|
-      date = Date.parse(item.link[/\d+/])
+      backup_date, _delimiter, title = item.title.partition(':').map(&:strip)
+      date = Date.parse(item.link[/\d+/]) rescue Date.parse(backup_date)
       time = item.description.scan(/\d{1,2}(?:\:\d{2})?\s*[ap]m/i).map do |time|
         Time.parse(time, date)
       end.min
@@ -128,7 +129,7 @@ venues << Venue.new(:name => 'Bottom of the Hill', :link => 'http://www.bottomof
       show(
         :time => time,
         :link => item.link,
-        :title => item.title.partition(':').last.strip,
+        :title => title,
         :description => fragment.text.strip
       )
     end
