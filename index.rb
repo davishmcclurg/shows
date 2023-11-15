@@ -202,31 +202,31 @@ venues << Venue.new(:name => 'DNA Lounge', :link => 'https://www.dnalounge.com')
   end
 end
 
-venues << Venue.new(:name => 'Kilowatt', :link => 'https://kilowattbar.com/') do
-  URI.open(URI.join(link, 'events')) do |html|
-    # We need to pull the api key from a script tag inside an iframe. Nokogiri
-    # doesn't parse javascript, so a greasy regex will have to do for now.
-    api_key = Nokogiri::HTML(html).css('div.sqs-block-content script').text.match(/"apiKey":"(\w+)"/)[1]
+# venues << Venue.new(:name => 'Kilowatt', :link => 'https://kilowattbar.com/') do
+#   URI.open(URI.join(link, 'events')) do |html|
+#     # We need to pull the api key from a script tag inside an iframe. Nokogiri
+#     # doesn't parse javascript, so a greasy regex will have to do for now.
+#     api_key = Nokogiri::HTML(html).css('div.sqs-block-content script').text.match(/"apiKey":"(\w+)"/)[1]
 
-    uri = URI.parse('https://events-api.dice.fm/v1/events?page[size]=24&types=linkout,event&filter[venues][]=Kilowatt')
-    response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-      request = Net::HTTP::Get.new(uri)
-      request['Accept'] = 'application/json'
-      request['x-api-key'] = api_key
+#     uri = URI.parse('https://events-api.dice.fm/v1/events?page[size]=24&types=linkout,event&filter[venues][]=Kilowatt')
+#     response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+#       request = Net::HTTP::Get.new(uri)
+#       request['Accept'] = 'application/json'
+#       request['x-api-key'] = api_key
 
-      http.request(request)
-    end
+#       http.request(request)
+#     end
 
-    JSON.parse(response.body).fetch('data').map do |event|
-      show(
-        time: Time.parse(event.fetch('date')).getlocal,
-        link: event.fetch('url'),
-        title: event.fetch('name'),
-        description: event.fetch('description')
-      )
-    end
-  end
-end
+#     JSON.parse(response.body).fetch('data').map do |event|
+#       show(
+#         time: Time.parse(event.fetch('date')).getlocal,
+#         link: event.fetch('url'),
+#         title: event.fetch('name'),
+#         description: event.fetch('description')
+#       )
+#     end
+#   end
+# end
 
 venues << Venue.new(:name => 'Knockout', :link => 'https://theknockoutsf.com') do
   title_regex = / • \d+(am|pm) to \d+(am|pm)\z/i
