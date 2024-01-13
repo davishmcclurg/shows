@@ -218,13 +218,16 @@ venues << Venue.new(:name => 'Kilowatt', :link => 'https://kilowattbar.com/') do
     end
 
     JSON.parse(response.body).fetch('data').map do |event|
+      title = event.fetch('name')
+      next if title =~ /karaoke/i
+
       show(
         time: Time.parse(event.fetch('date')).getlocal,
         link: event.fetch('url'),
-        title: event.fetch('name'),
+        title: title,
         description: event.fetch('description')
       )
-    end
+    end.compact
   end
 end
 
