@@ -97,7 +97,7 @@ venues << Venue.new(:name => 'Cornerstone (Berkeley)', :link => 'https://www.cor
       date = Date.parse(item.css('.day-events-header .date-2').text)
       # Handle yearless dates through the december->january rollover
       date += 365 if date.month < today.month
-      time = Time.parse(item.css('.day-event-content .time-2').text, date)
+      time = Time.parse(item.css('.day-event-content .time-2').first.text, date)
 
       description = item.css('.day-event-content #event-desc').children.map do |child|
         child.css('br').each { |node| node.replace(' / ') }
