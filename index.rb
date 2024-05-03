@@ -86,6 +86,10 @@ def seetickets_parser(html)
   end.compact
 end
 
+def truncate(text, len = 1000)
+  text.length > len ? text[0...999].chomp(' ') + "…" : text
+end
+
 today = Date.today
 venues = []
 
@@ -183,7 +187,7 @@ venues << Venue.new(:name => 'DNA Lounge', :link => 'https://www.dnalounge.com')
         time: Time.parse(item.css('pubDate').text),
         link: description[link_regex] || item.css('guid').text,
         title: title,
-        description: description.length > 1000 ? description[0...999] + "…" : description
+        description: description
       )
     end
   end
@@ -302,7 +306,7 @@ File.write('index.html', ERB.new(<<~ERB).result)
               <p>
                 <strong><a href="<%= h(show.link) %>"><%= h(show.title) %></a></strong>
                 <br>
-                <%= h(show.description) %>
+                <%= h(truncate(show.description)) %>
               </p>
             </td>
             <td nowrap valign="top">
