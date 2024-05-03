@@ -89,26 +89,14 @@ end
 today = Date.today
 venues = []
 
-venues << Venue.new(:name => 'Cornerstone (Berkeley)', :link => 'https://www.cornerstoneberkeley.com/events') do
+venues << Venue.new(:name => 'Cornerstone (Berkeley)', :link => 'https://cornerstoneberkeley.com/events') do
   URI.open(link) do |html|
-    Nokogiri(html).css('.shows-wrapper .w-dyn-item').map do |item|
-      title = item.css('.day-events-header .show-name').text
-
-      date = Date.parse(item.css('.day-events-header .date-2').text)
-      # Handle yearless dates through the december->january rollover
-      date += 365 if date.month < today.month
-      time = Time.parse(item.css('.day-event-content .time-2').first.text, date)
-
-      description = item.css('.day-event-content #event-desc').children.map do |child|
-        child.css('br').each { |node| node.replace(' / ') }
-        child.text.strip
-      end.reject(&:empty?).join(' / ')
-
+    Nokogiri(html).css('div.shows-wrapper div.w-dyn-item').map do |item|
       show(
-        :title => title,
-        :time => time,
-        :link => item.css('.day-event-content .tickets').attr('href').value,
-        :description => description.length > 1000 ? description[0...999] + "…" : description
+        :title => item.css('div.event-name').text,
+        :description => item.css('div#event-desc p').map(&:text).join(' '),
+        :time => Time.parse(item.css('div.time-2').first.text, Date.parse(item.css('div.date-2').text)),
+        :link => item.css('a.tickets').attr('href').value
       )
     end
   end
