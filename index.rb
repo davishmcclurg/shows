@@ -130,7 +130,7 @@ venues << Venue.new(:name => 'Bottom of the Hill', :link => 'http://www.bottomof
 end
 
 venues << Venue.new(:name => 'Brick and Mortar', :link => 'https://www.brickandmortarmusic.com') do
-  URI.open(link) do |html|
+  URI.open(link, :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE) do |html|
     previous_date = today
     Nokogiri(html).css('.tw-event-name-container').flat_map do |event_name_container|
       row = event_name_container.parent
