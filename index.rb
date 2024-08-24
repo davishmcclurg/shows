@@ -223,26 +223,22 @@ venues << Venue.new(:name => 'Kilowatt', :link => 'https://kilowattbar.com/') do
 end
 
 venues << Venue.new(:name => 'Knockout', :link => 'https://theknockoutsf.com') do
-  title_regex = / • \d+(am|pm) to \d+(am|pm)\z/i
+  [today, today>>1].map do |date|
+    date.strftime('%m-%Y')
+  end.flat_map do |month|
+    URI.open(URI.join(link, "/api/open/GetItemsByMonth?month=#{month}&collectionId=668dcda020574371451c8e12")) do |json|
+      JSON.load_file(json).map do |item|
+        title = item['title']
+        next if title =~ /(karaoke|bingo|trivia)/i
 
-  URI.open(URI.join(link, 'events/feed')) do |xml|
-    RSS::Parser.parse(xml).items.map do |item|
-      description = Nokogiri::HTML(item.content_encoded).text
-
-      # Workaround for the occasional empty title
-      title = item.title
-      title = description.split('•').first if title.empty?
-      title = title.gsub(title_regex, '')
-
-      next if title =~ /(karaoke|bingo|trivia)/i
-
-      show(
-        time: item.pubDate.getlocal,
-        link: item.link,
-        title: title,
-        description: description
-      )
-    end.compact
+        show(
+          time: Time.at(item['startDate'] / 1000),
+          link: URI.join(link, item['fullUrl']),
+          title: title,
+          description: Nokogiri::HTML(item['excerpt']).text
+        )
+      end.compact
+    end
   end
 end
 
