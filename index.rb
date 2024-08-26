@@ -99,7 +99,7 @@ venues << Venue.new(:name => 'Cornerstone (Berkeley)', :link => 'https://corners
       show(
         :title => item.css('div.event-name').text,
         :description => item.css('div#event-desc p').map(&:text).join(' '),
-        :time => Time.parse(item.css('div.time-2').first.text, Date.parse(item.css('div.date-2').text)),
+        :time => Time.parse(item.css('div.time-2:not(:empty)').first.text, Date.parse(item.css('div.date-2').text)),
         :link => item.css('a.tickets').attr('href').value
       )
     end
