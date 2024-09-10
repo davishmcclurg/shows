@@ -227,7 +227,7 @@ venues << Venue.new(:name => 'Knockout', :link => 'https://theknockoutsf.com') d
     date.strftime('%m-%Y')
   end.flat_map do |month|
     URI.open(URI.join(link, "/api/open/GetItemsByMonth?month=#{month}&collectionId=668dcda020574371451c8e12")) do |json|
-      JSON.load_file(json).map do |item|
+      JSON.parse(json.read).map do |item|
         title = item['title']
         next if title =~ /(karaoke|bingo|trivia)/i
 
