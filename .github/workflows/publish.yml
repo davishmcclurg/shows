@@ -5,6 +5,7 @@ on:
       - main
   schedule:
     - cron: '*/15 * * * *'
+  workflow_dispatch:
 jobs:
   publish:
     runs-on: macos-latest
