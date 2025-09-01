@@ -107,7 +107,7 @@ venues << Venue.new(:name => 'Cornerstone (Berkeley)', :link => 'https://corners
 end
 
 venues << Venue.new(:name => 'Bottom of the Hill', :link => 'https://www.bottomofthehill.com') do
-  URI.open(URI.join(link, 'RSS.xml'), 'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:104.0) Gecko/20100101 Firefox/104.0') do |rss|
+  URI.open(URI.join(link, 'RSS.xml'), :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE, 'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:104.0) Gecko/20100101 Firefox/104.0') do |rss|
     RSS::Parser.parse(rss).items.group_by(&:link).transform_values do |items|
       items.max_by(&:date)
     end.map do |date, item|
