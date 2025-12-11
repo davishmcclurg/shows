@@ -1,8 +1,6 @@
 require 'bundler'
 Bundler.require
 
-puts "OpenSSL::VERSION: #{OpenSSL::VERSION}"
-
 Show = Struct.new(:time, :link, :title, :description, :venue, :keyword_init => true) do
   def ical_link
     dtstart = ical_time(time)
