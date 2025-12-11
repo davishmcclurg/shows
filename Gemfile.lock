@@ -1,0 +1,42 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    base64 (0.2.0)
+    cgi (0.4.2)
+    date (3.4.1)
+    digest (3.2.0)
+    erb (4.0.4)
+      cgi (>= 0.3.3)
+    json (2.9.1)
+    nokogiri (1.18.10-arm64-darwin)
+      racc (~> 1.4)
+    open-uri (0.5.0)
+      stringio
+      time
+      uri
+    openssl (3.3.2)
+    racc (1.8.1)
+    rexml (3.4.0)
+    rss (0.3.1)
+      rexml
+    stringio (3.1.2)
+    time (0.4.1)
+      date
+    uri (1.0.4)
+
+PLATFORMS
+  arm64-darwin
+
+DEPENDENCIES
+  base64
+  date
+  digest
+  erb
+  json
+  nokogiri
+  open-uri
+  openssl (~> 3.3.2)
+  rss
+
+BUNDLED WITH
+   2.6.9

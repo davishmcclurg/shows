@@ -1,18 +1,7 @@
-require 'base64'
-require 'date'
-require 'digest'
-require 'erb'
-require 'json'
-require 'open-uri'
-require 'rss'
+require 'bundler'
+Bundler.require
 
-require 'bundler/inline'
-
-gemfile do
-  source 'https://rubygems.org'
-  gem 'nokogiri'
-  gem 'openssl', '~> 3.3.2' # https://github.com/ruby/openssl/issues/949
-end
+puts "OpenSSL::VERSION: #{OpenSSL::VERSION}"
 
 Show = Struct.new(:time, :link, :title, :description, :venue, :keyword_init => true) do
   def ical_link
