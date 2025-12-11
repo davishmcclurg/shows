@@ -11,6 +11,7 @@ require 'bundler/inline'
 gemfile do
   source 'https://rubygems.org'
   gem 'nokogiri'
+  gem 'openssl', '~> 3.3.2' # https://github.com/ruby/openssl/issues/949
 end
 
 Show = Struct.new(:time, :link, :title, :description, :venue, :keyword_init => true) do
