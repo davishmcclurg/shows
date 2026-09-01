@@ -223,7 +223,7 @@ venues << Venue.new(:name => 'Knockout', :link => 'https://theknockoutsf.com') d
         next if title =~ /(karaoke|bingo|trivia)/i
 
         show(
-          time: Time.at(item['startDate'] / 1000),
+          time: Time.at(item['structuredContent']['startDate'] / 1000),
           link: URI.join(link, item['fullUrl']),
           title: title,
           description: Nokogiri::HTML(item['excerpt']).text
