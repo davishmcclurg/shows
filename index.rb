@@ -159,7 +159,7 @@ venues << Venue.new(:name => 'Brick and Mortar', :link => 'https://www.brickandm
 end
 
 venues << Venue.new(:name => 'Rickshaw Stop', :link => 'https://rickshawstop.com/') do
-  URI.open(link) do |html|
+  URI.open(link, :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE) do |html|
     seetickets_parser(html)
   end
 end
