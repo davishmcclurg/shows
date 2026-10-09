@@ -1,6 +1,8 @@
 require 'bundler'
 Bundler.require
 
+BROWSER_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:104.0) Gecko/20100101 Firefox/104.0'
+
 Show = Struct.new(:time, :link, :title, :description, :venue, :keyword_init => true) do
   def ical_link
     dtstart = ical_time(time)
@@ -95,7 +97,7 @@ venues << Venue.new(:name => 'Cornerstone (Berkeley)', :link => 'https://corners
 end
 
 venues << Venue.new(:name => 'Bottom of the Hill', :link => 'https://www.bottomofthehill.com') do
-  URI.open(URI.join(link, 'RSS.xml'), :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE, 'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:104.0) Gecko/20100101 Firefox/104.0') do |rss|
+  URI.open(URI.join(link, 'RSS.xml'), :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE, 'User-Agent' => BROWSER_USER_AGENT) do |rss|
     # weird invalid date
     rss = rss.read.sub('Wed, 10 Dec 2025 07:00:005 -0800', 'Wed, 10 Dec 2025 07:00:00 -0800')
 
@@ -158,11 +160,11 @@ venues << Venue.new(:name => 'Brick and Mortar', :link => 'https://www.brickandm
   end
 end
 
-venues << Venue.new(:name => 'Rickshaw Stop', :link => 'https://rickshawstop.com/') do
-  URI.open(link) do |html|
-    seetickets_parser(html)
-  end
-end
+# venues << Venue.new(:name => 'Rickshaw Stop', :link => 'https://rickshawstop.com/') do
+#   URI.open(link) do |html|
+#     seetickets_parser(html)
+#   end
+# end
 
 venues << Venue.new(:name => 'DNA Lounge', :link => 'https://www.dnalounge.com') do
   # Regex to dig the calendar link out of the description
