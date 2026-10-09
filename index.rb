@@ -160,11 +160,11 @@ venues << Venue.new(:name => 'Brick and Mortar', :link => 'https://www.brickandm
   end
 end
 
-venues << Venue.new(:name => 'Rickshaw Stop', :link => 'https://rickshawstop.com/') do
-  URI.open(link, 'User-Agent' => BROWSER_USER_AGENT) do |html|
-    seetickets_parser(html)
-  end
-end
+# venues << Venue.new(:name => 'Rickshaw Stop', :link => 'https://rickshawstop.com/') do
+#   URI.open(link) do |html|
+#     seetickets_parser(html)
+#   end
+# end
 
 venues << Venue.new(:name => 'DNA Lounge', :link => 'https://www.dnalounge.com') do
   # Regex to dig the calendar link out of the description
